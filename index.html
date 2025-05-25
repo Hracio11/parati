@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>🌻 Tarjeta con Girasoles</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #ffe6cc, #ffffe0);
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .dedicatoria {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      max-width: 400px;
+      z-index: 10;
+    }
+
+    .dedicatoria h1 {
+      color: #d4a017;
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    .dedicatoria p {
+      font-size: 1.1em;
+      color: #444;
+      margin-bottom: 20px;
+    }
+
+    .dedicatoria button {
+      padding: 10px 20px;
+      background-color: #ffcc00;
+      border: none;
+      border-radius: 25px;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .dedicatoria button:hover {
+      background-color: #e6b800;
+    }
+
+    .girasol {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      animation: flotar 5s ease-out forwards;
+    }
+
+    .petalo-gira {
+      width: 20px;
+      height: 40px;
+      background: #ffeb3b;
+      position: absolute;
+      border-radius: 50% 50% 0 0;
+      transform-origin: bottom center;
+    }
+
+    .centro-gira {
+      width: 30px;
+      height: 30px;
+      background: #6b3e26;
+      border-radius: 50%;
+      position: absolute;
+      top: 45px;
+      left: 25px;
+      z-index: 2;
+    }
+
+    @keyframes flotar {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-150px) scale(1.1);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Dedicatoria -->
+  <div class="dedicatoria">
+    <h1>🌻 Para Ti</h1>
+    <p>Haz clic en el botón para hacer florecer girasoles<br> y llenar tu día de luz y alegría 🌻</p>
+    <button onclick="crearGirasol()">🌻 Generar Girasol</button>
+  </div>
+
+  <script>
+    function crearGirasol() {
+      const girasol = document.createElement('div');
+      girasol.classList.add('girasol');
+
+      // Posición aleatoria en el cuerpo
+      const left = Math.random() * (window.innerWidth - 80);
+      const top = Math.random() * (window.innerHeight - 80);
+      girasol.style.left = left + 'px';
+      girasol.style.top = top + 'px';
+
+      // Crear pétalos
+      for (let i = 0; i < 12; i++) {
+        const petalo = document.createElement('div');
+        petalo.classList.add('petalo-gira');
+        petalo.style.transform = `rotate(${i * 30}deg)`;
+        petalo.style.top = '20px';
+        petalo.style.left = '30px';
+        girasol.appendChild(petalo);
+      }
+
+      // Centro del girasol
+      const centro = document.createElement('div');
+      centro.classList.add('centro-gira');
+      girasol.appendChild(centro);
+
+      document.body.appendChild(girasol);
+
+      // Eliminar después de 5 segundos para no saturar la pantalla
+      setTimeout(() => {
+        girasol.remove();
+      }, 5000);
+    }
+  </script>
+
+</body>
+</html>
